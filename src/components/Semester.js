@@ -19,6 +19,35 @@ class Semester extends Component {
     console.log("Semester.onRadioClick "+JSON.stringify(event.target.value));
     this.setState({selected: event.target.value});
   }
+
+  addStudent = (student) => {
+    const token = Cookies.get('XSRF-TOKEN');
+ 
+    fetch(`${SERVER_URL}/student`,
+      { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json',
+                   'X-XSRF-TOKEN': token  }, 
+        body: JSON.stringify(student)
+      })
+    .then(res => {
+        if (res.ok) {
+          toast.success("Student successfully added", {
+              position: toast.POSITION.BOTTOM_LEFT
+          });
+        } else {
+          toast.error("Error when adding", {
+              position: toast.POSITION.BOTTOM_LEFT
+          });
+          console.error('Post http status =' + res.status);
+        }})
+    .catch(err => {
+      toast.error("Error when adding", {
+            position: toast.POSITION.BOTTOM_LEFT
+        });
+        console.error(err);
+    })
+  }
   
   render() {    
       const icolumns = [
