@@ -47,8 +47,8 @@ class AddStudent extends Component {
                         <TextField fullWidth label="Student Email" name="email" onChange={this.handleChange}  /> 
                     </DialogContent>
                     <DialogActions>
-                        <Button color="secondary" onClick={this.handleClose}>Cancel</Button>
-                        <Button color="primary" onClick={this.handleAdd}>Add</Button>
+                        <Button id="cancel_add" color="secondary" onClick={this.handleClose}>Cancel</Button>
+                        <Button id="add_student" color="primary" onClick={this.handleAdd}>Add</Button>
                     </DialogActions>
                 </Dialog>
             </React.Fragment>
