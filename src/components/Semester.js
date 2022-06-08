@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AddStudent from './AddStudent.js';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -7,6 +8,9 @@ import Button from '@mui/material/Button';
 import Radio from '@mui/material/Radio';
 import {DataGrid} from '@mui/x-data-grid';
 import {SEMESTER_LIST} from '../constants.js'
+import { ToastContainer, toast } from 'react-toastify';
+import {SERVER_URL} from '../constants.js'
+import Cookies from 'js-cookie';
 
 // user selects from a list of  (year, semester) values
 class Semester extends Component {
@@ -19,6 +23,20 @@ class Semester extends Component {
     console.log("Semester.onRadioClick "+JSON.stringify(event.target.value));
     this.setState({selected: event.target.value});
   }
+
+  handleClose = () => {
+    this.setState({open:false});
+  }
+  
+  handleClickOpen = () => {
+    this.setState({open:true});
+
+  }
+
+  handleChange = () => {
+    this.setState({}); 
+  }
+
 
   addStudent = (student) => {
     const token = Cookies.get('XSRF-TOKEN');
@@ -92,7 +110,8 @@ class Semester extends Component {
                 Get Schedule
               </Button>
 
-              
+              <AddStudent addStudent={this.addStudent} />
+              <ToastContainer autoclose={1500} />  
               <Button component={Link} 
                     to={{pathname:'/addStudent'}}
                 variant="outlined" color="primary" style={{margin: 10}}>

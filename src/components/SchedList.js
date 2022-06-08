@@ -70,7 +70,8 @@ class SchedList extends Component {
       fetch(`${SERVER_URL}/schedule/${id}`,
         {
           method: 'DELETE',
-          headers: { 'X-XSRF-TOKEN': token }
+          headers: { 'X-XSRF-TOKEN': token },
+          credentials: 'include' 
         })
     .then(res => {
         if (res.ok) {
@@ -102,6 +103,7 @@ class SchedList extends Component {
         method: 'POST', 
         headers: { 'Content-Type': 'application/json',
                    'X-XSRF-TOKEN': token  }, 
+        credentials: 'include', 
         body: JSON.stringify(course)
       })
     .then(res => {
